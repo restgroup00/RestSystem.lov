@@ -19,3 +19,21 @@
   // | `__root.tsx` | app shell — wraps every page; preserve `<Outlet />` |
   //
   // `routeTree.gen.ts` is auto-generated. Don't edit it by hand.
+
+  import { createRouter } from '@tanstack/react-router'
+  import { routeTree } from './routeTree.gen'
+
+  export function createRouterInstance() {
+    return createRouter({
+      routeTree,
+      context: {
+        // add any context here
+      },
+    })
+  }
+
+  declare module '@tanstack/react-router' {
+    interface Register {
+      router: ReturnType<typeof createRouterInstance>
+    }
+  }
